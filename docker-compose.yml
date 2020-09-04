@@ -1,0 +1,27 @@
+version: "3.1"
+
+networks:
+    personal:
+        driver: bridge
+        # external:
+        #  name: srv_personal
+
+services:
+    db:
+        image: mysql
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        env_file:
+            - .env
+        networks:
+            - personal
+        ports:
+            - 3306:3306
+
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - 8080:8080
+        networks:
+            - personal

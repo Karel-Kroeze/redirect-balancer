@@ -1,0 +1,12 @@
+extends ../layout
+
+block head
+
+block content
+    section.content.paper
+        h1.title New Trial
+        div#trial-form(data-method="POST" data-target="/trials" data-new=true)
+        
+block footer
+    script(src="/assets/js/trial-form.js")
+    link(rel="stylesheet", href="/assets/css/trial-form.css")

@@ -1,0 +1,10 @@
+extends ../layout
+
+block content
+    section.content.paper.mz
+        h1.title Sign in
+        p We don't want you to make an account here. We can't tell accidentally let slip secrets that we don't know. Just sign in with one of your other accounts, and we'll trust them to keep your credentials save.
+        p All we'll store is your e-mail address, so that we can identify you next time you log in, and a tiny version of your avatar, if you have any, to make the site a bit more personal.
+        a.btn.waves-effect.white.blue-text(href="/auth/google") 
+            img.left(src="/assets/img/google-g-icon.svg" style="width: auto; height: 70%; margin-top: 5px; margin-left: -12px; margin-right: 1em;")
+            | Sign in with Google

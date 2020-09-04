@@ -1,0 +1,36 @@
+doctype
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport', content="width=device-width, initial-scale=1.0")
+        title= title
+        link(rel="stylesheet", href="/assets/css/style.css")
+        script(src="/assets/js/materialize.min.js")
+        block head
+    body
+        .container.mz(style="margin-top: 3em; margin-bottom: 1em;")
+            #header
+                #title
+                    h1.title Randomizer
+                    h2.subtitle= subtitle
+                if(!noLoginWidget)
+                    #login-widget
+                        if user
+                            a.btn.waves-effect.red(href="/auth/logout") 
+                                .flex-wrapper
+                                    span Logout
+                                    if user.avatar
+                                        img.avatar(src=user.avatar.toString())
+                        else
+                            a.btn.waves-effect.blue(href="/auth/login") 
+                                | Login
+        block content
+
+        .footer.mz
+            block footer
+            - let toasts = getMessages()
+            if (toasts.length > 0)
+                for toast in toasts
+                    toast(data-level=toast.level, data-message=`${toast.message}`)
+            script(src="/assets/js/toasts.js")
+            
