@@ -5,7 +5,7 @@ block head
 block content
     section.content.paper
         h1.title Update #{trial.label}
-        div#trial-form(data-method="POST" data-target=`/trials/update/${trial.id}` data-new=false data-trial=JSON.stringify(trial))
+        div#trial-form.mz-reset(data-method="POST" data-target=`/trials/update/${trial.id}` data-new=false data-trial=JSON.stringify(trial))
         
 block footer
     script(src="/assets/js/trial-form.js")

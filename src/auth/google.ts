@@ -1,6 +1,5 @@
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import { HOST, PORT } from "../app";
 import { Router } from "express";
 import { GetUser } from "./auth";
 import { User } from "../entity/user";
@@ -12,7 +11,9 @@ passport.use(
         {
             clientID: process.env.GOOGLE_AUTH_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_AUTH_CLIENT_SECRET!,
-            callbackURL: `http://${HOST}:${PORT}/auth/google/callback`,
+            callbackURL: `http://${
+                process.env.VIRTUAL_HOST || "localhost:3000"
+            }/auth/google/callback`,
         },
         async (accessToken, refreshToken, profile, cb) => {
             try {

@@ -7272,8 +7272,6 @@ html {
 
 html, body {
   font-family: "Roboto", sans-serif;
-  max-height: 100vh;
-  overflow: auto;
 }
 
 img.avatar {
@@ -7327,6 +7325,14 @@ h1:first-child, title:first-child {
 
 toast {
   display: hidden;
+}
+
+.dropdown-item {
+  font-size: smaller !important;
+  text-transform: uppercase;
+}
+.dropdown-item i.material-icons {
+  margin-right: 0.1em !important;
 }
 
 /*# sourceMappingURL=style.css.map */

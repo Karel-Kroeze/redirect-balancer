@@ -21,6 +21,9 @@ export class Condition extends BaseEntity {
     @Column({ type: "double" })
     weight!: number;
 
+    @Column({ default: 0 })
+    count!: number;
+
     @ManyToOne((type) => Trial, (trial) => trial.conditions)
     trial!: Trial;
 }

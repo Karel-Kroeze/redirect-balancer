@@ -70,6 +70,32 @@ router.get("/:id", async (req, res) => {
     }
 });
 
+router.get("/reset/:id", async (req, res) => {
+    const trial = await Trial.findOne({
+        where: { user: (req.user as User).id, id: req.params.id },
+    });
+
+    if (!trial) {
+        req.flash("warning", `Trial not found.`);
+    } else {
+        try {
+            await Promise.all(
+                trial.conditions.map((c) => {
+                    c.count = 0;
+                    return c.save();
+                })
+            );
+            req.flash("info", `trial '${trial.label}' reset`);
+        } catch (err) {
+            req.flash(
+                "warning",
+                `error resetting '${trial.label}': ${(err as Error).message}`
+            );
+        }
+    }
+    res.redirect("/trials");
+});
+
 router.get("/delete/:id", async (req, res) => {
     const trial = await Trial.findOne({
         where: { user: (req.user as User).id, id: req.params.id },

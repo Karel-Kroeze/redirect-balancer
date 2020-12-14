@@ -9,8 +9,7 @@ block content
                     tr
                         th Trial
                         th Conditions
-                        th Link
-                        th Action
+                        th Actions
                 
                 tbody
                     for trial in trials
@@ -18,12 +17,32 @@ block content
                             td= trial.label
                             td= trial.conditions.map( c => c.label ).join( ", ")
                             td
-                                a.material-icons(href=`/randomize/${trial.hash}` title='preview') visibility
-                                a.material-icons(title='copy to clipboard' onclick=`navigator.clipboard.writeText( window.location.protocol + "//" + window.location.hostname + ( window.location.port ? ( ":" + window.location.port ) : "" ) + "/randomize/${trial.hash}" ).then( _ => doToast("URL copied to clipboard") )` href="#") content_paste
-                            td
-                                a.material-icons(href=`/trials/${trial.id}` title='details') search
-                                a.material-icons(href=`/trials/update/${trial.id}` title='edit') edit
-                                a.material-icons.red-text(href=`/trials/delete/${trial.id}` title='remove') delete
+                                a.dropdown-trigger.btn(href="#" data-target=`actions-${trial.id}`) ...
+                                ul.dropdown-content(id=`actions-${trial.id}`)
+                                    li
+                                        a.dropdown-item(href=`/randomize/${trial.hash}` title='preview')
+                                            i.material-icons visibility
+                                            | preview
+                                    li
+                                        a.dropdown-item(title='copy to clipboard' onclick=`navigator.clipboard.writeText( window.location.protocol + "//" + window.location.hostname + ( window.location.port ? ( ":" + window.location.port ) : "" ) + "/randomize/${trial.hash}" ).then( _ => doToast("URL copied to clipboard") )` href="#")
+                                            i.material-icons content_paste
+                                            | copy link
+                                    li
+                                        a.dropdown-item(href=`/trials/${trial.id}` title='details')
+                                            i.material-icons search
+                                            | details
+                                    li
+                                        a.dropdown-item(href=`/trials/update/${trial.id}` title='edit')
+                                            i.material-icons edit
+                                            | edit
+                                    li
+                                        a.dropdown-item(href=`/trials/reset/${trial.id}` title='reset')
+                                            i.material-icons autorenew
+                                            | reset
+                                    li
+                                        a.dropdown-item.red-text(href=`/trials/delete/${trial.id}` title='remove')
+                                            i.material-icons delete
+                                            | remove
 
         else 
             .cta
@@ -32,6 +51,11 @@ block content
                 p A trial is a single experiment or other event that can have any number of conditions for randomization. 
 
         a.btn( href= "/trials/create" ) 
+            div(style="white-space: nowrap;")
             i.material-icons.left add
             | Create a Trial
+
+        script.
+            const els = document.querySelectorAll('.dropdown-trigger');
+            M.Dropdown.init(els, {constrainWidth: false});
 

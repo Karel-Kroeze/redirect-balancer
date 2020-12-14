@@ -1,1 +1,14 @@
 extends ../layout
+
+block content
+    section.content.paper
+        h1.title= trial.label
+        p= `${trial.sampling} sampling`
+        - const totalCount = trial.conditions.reduce( (acc, c) => acc += c.count, 0 )
+        - const round = ( number ) => Math.round( number * 100 ) / 100
+        
+        for condition in trial.conditions
+            h2.title= condition.label
+            p= `target: ${condition.target}`
+            p= `weight: ${round( condition.weight)}`
+            p= `assigned: ${condition.count} (${round( condition.count / totalCount ) || 0})`

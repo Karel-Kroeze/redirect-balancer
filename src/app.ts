@@ -1,15 +1,9 @@
 // set up env variables
-import path from "path";
 import dotenv from "dotenv";
-const env = dotenv.config({
-    path: path.join(__dirname, "../.env"),
-});
+dotenv.config();
 
-// where should we listen?
-export const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
-export const HOST = process.env.HOST || "localhost";
-
-import express, { Request, Response, NextFunction } from "express";
+import path from "path";
+import express from "express";
 import { AddressInfo } from "net";
 import { AuthRouter, isAuthenticated } from "./auth/auth";
 import { flash } from "./flash";
@@ -20,12 +14,13 @@ import passport from "passport";
 
 // database and models
 import "reflect-metadata";
-import { createConnection } from "typeorm";
+import { createConnection, ConnectionOptions } from "typeorm";
+import { Condition } from "./entity/condition";
+import { Trial } from "./entity/trial";
 import { User } from "./entity/user";
+
 import { TrialRouter } from "./routers/trial";
 import { RandomizerRouter } from "./routers/randomizer";
-import { Trial } from "./entity/trial";
-import { Condition } from "./entity/condition";
 export const app = express();
 
 app.use(cookieParser(process.env.COOKIE_SECRET || "dev-secret"));
@@ -61,18 +56,29 @@ app.use("/", (req, res) => {
 });
 
 // start listening
-const server = app.listen(PORT, HOST, async () => {
+const server = app.listen(3000, "0.0.0.0", async () => {
     const address = server.address() as AddressInfo;
     console.log(`listening on http://${address.address}:${address.port}`);
-    const db = await createConnection({
-        type: "mysql",
-        host: process.env.MYSQL_HOST,
-        port: 3306,
-        username: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASSWORD,
-        database: process.env.MYSQL_DATABASE,
-        entities: [User, Trial, Condition],
-        synchronize: true,
-    });
-    console.log(`database connected`);
+    try {
+        const connectionOptions: ConnectionOptions = {
+            type: "mysql",
+            entities: [Condition, Trial, User],
+            synchronize: true,
+            host: process.env.MYSQL_HOST,
+            username: process.env.MYSQL_USER,
+            password: process.env.MYSQL_PASSWORD,
+            database: process.env.MYSQL_DATABASE,
+        };
+        // console.log({ connectionOptions });
+        await createConnection(connectionOptions);
+        console.log(`database connected`);
+    } catch (err) {
+        console.error(
+            `Error connecting to database: \n\t${
+                process.env.MYSQL_HOST
+            }:${3306}\n\t${err}`
+        );
+        process.exit(1); // exit so that docker will restart when DB _is_ available
+        // todo: use a wait-for wrapper?
+    }
 });

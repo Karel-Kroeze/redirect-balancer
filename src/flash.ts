@@ -29,7 +29,7 @@ declare global {
 
 export function flash() {
     return function (req: Request, res: Response, next: NextFunction) {
-        if (!req.session) throw "sessions must be enabled";
+        if (!req.session) throw "sessions must be enabled!";
         req.flashMessages = res.locals.flash = req.session.flash =
             req.session.flash ?? {};
         res.locals.getMessages = () => {
