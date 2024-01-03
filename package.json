@@ -34,7 +34,7 @@
         "reflect-metadata": "^0.1.13",
         "sharp": "^0.25.4",
         "shortid": "^2.2.15",
-        "typeorm": "^0.2.25"
+        "typeorm": "^0.3.18"
     },
     "devDependencies": {
         "@types/body-parser": "^1.19.0",
