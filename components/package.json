@@ -5,10 +5,10 @@
     "dependencies": {
         "@material-ui/core": "^4.11.0",
         "@material-ui/icons": "^4.9.1",
-        "formik": "^2.1.5",
+        "formik": "^2.2.9",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
-        "yup": "^0.29.3"
+        "yup": "^0.32.10"
     },
     "scripts": {
         "serve": "parcel serve ./src/index.html",
