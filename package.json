@@ -22,7 +22,7 @@
         "express": "^4.17.1",
         "express-session": "^1.17.1",
         "file-type": "^14.7.1",
-        "formik": "^2.1.5",
+        "formik": "^2.2.9",
         "lodash": "^4.17.20",
         "materialize-css": "^1.0.0-rc.2",
         "ms": "^2.1.2",
@@ -30,11 +30,11 @@
         "node-fetch": "^2.6.1",
         "passport": "^0.4.1",
         "passport-google-oauth20": "^2.0.0",
-        "pug": "^3.0.0",
+        "pug": "^3.0.3",
         "reflect-metadata": "^0.1.13",
-        "sharp": "^0.25.4",
+        "sharp": "^0.33.0",
         "shortid": "^2.2.15",
-        "typeorm": "^0.2.25"
+        "typeorm": "^0.3.12"
     },
     "devDependencies": {
         "@types/body-parser": "^1.19.0",
