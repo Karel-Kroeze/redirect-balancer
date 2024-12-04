@@ -23,7 +23,7 @@
         "express-session": "^1.17.1",
         "file-type": "^14.7.1",
         "formik": "^2.1.5",
-        "lodash": "^4.17.20",
+        "lodash": "^4.17.21",
         "materialize-css": "^1.0.0-rc.2",
         "ms": "^2.1.2",
         "mysql": "^2.18.1",
