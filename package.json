@@ -14,7 +14,7 @@
         "comps:build": "pushd components && yarn clean && yarn build && popd && cp components/dist/*.js assets/js/components"
     },
     "dependencies": {
-        "@material-ui/icons": "^4.9.1",
+        "@material-ui/icons": "^4.11.3",
         "@types/sharp": "^0.25.1",
         "body-parser": "^1.19.0",
         "cookie-parser": "^1.4.5",
